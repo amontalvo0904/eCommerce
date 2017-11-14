@@ -1,0 +1,138 @@
+<!doctype HTML>
+<html>
+
+    <head>
+        <title> Ace Speaker </title>
+        <meta name="viewpoint" content="width=device-width, intial-scale=1.0">
+
+        <style>
+            h1{
+                color:#C50000;
+                text-align: center;
+            }
+            img{
+                border: 2px solid black;
+                width: 150px;
+            }
+            input{
+                border: 1px solid black;
+                width: 90px;
+            }
+            button{
+                width: 100px;
+            }
+            div{
+                background-color:#EBEB6D;
+                width:1500px;
+            }
+            p {
+                border: 2px solid black;
+                outline: #C50000 outset 4px;
+                margin: auto;    
+                padding: 20px;
+                text-align: left;
+            }
+            body {
+                background-color:#999999
+            }
+
+        </style>
+
+        <script>
+        
+
+        //global variables
+        var p1 = 10, wp1 = 6;
+        var p2 = 12, wp2 = 8;
+        var p3 = 15, wp3 = 11;
+        var tr = 8.75;
+        var op = document.getElementById("output");    
+
+            
+            function process(){
+                //quantities
+                var q1 = parseInt(document.getElementById("qty1").value);
+                var q2 = parseInt(document.getElementById("qty2").value);
+                var q3 = parseInt(document.getElementById("qty3").value);
+                
+                //calculations
+                var cust_st = (p1*q1) + (p2*q2) + (p3*q3);
+                var cust_total = cust_st + tax + shipping;
+                var comp_st = (wp1*q1) + (wp2*q2) + (wp3*q3);
+                var profit = cust_st - comp_st;
+                var tax = parsFloat(cust_st*(tr/100).toFixed(2));
+                var shipping = 0;
+                var items_sold = q1 + q2 + q3;
+
+                //shipping cost
+                if(cust_st < 100){
+                    shipping = 25;
+                }else if (cust_st >= 100 && cust_st <= 200 ){
+                    shipping = 10;
+                }else{
+                     shipping = 0;
+                }
+        
+            
+            
+            //display
+            
+            
+
+            var build = " ";
+            build += "<br><hr>";
+            build += "<pre>";
+            build += "<u> **Customer Information** </u> <br>";
+            build += "Subtotal:                 $" + cust_st + "<br>";
+            build += "Tax:                      $" + tax + "<br>";
+            build += "Shipping and Handling:    $" + shipping + "<br>";
+            build += "Total:                    $" + cust_total + "<br><hr>";
+            build += "<u> **Company Information** </u><br>";
+            build += "Customer Subtotal:        $" + cust_st + "<br>";
+            build += "Company Subtotal:         $" + comp_st + "<br>";
+            build += "Profit/Loss:              $" + profit + "<br>";
+            build += "Total Item Sold:           " + items_sold + "<br>";
+            
+            op.innerHTML = build;
+
+        }
+        </script>
+    
+    </head>
+
+    
+        <h1> Ace Speakers </h1>
+        <!--Item 1-->
+        <div>
+            <img src = "speaker1.jpg"><br>
+            <p>Bluetooth Emoji Speaker: Poop Emoji with a kickstand</p><br>
+            <span> Price: $10    Qty:</span>
+            <input type = "text" id "qty1" placeholder = "Enter a number">
+        </div>
+    
+        <!-- Item 2 -->
+        <div>
+            <img src = "speaker2.jpg"><br>
+            <p>Bluetooth Emoji Speaker: Sunglasses Emoji with a kickstand</p><br>
+            <span> Price: $12    Qty:</span>
+            <input type = "text" id "qty2" placeholder = "Enter a number">
+        </div>
+    
+        <!-- Item 3 -->
+        <div>
+            <img src = "speaker3.jpg"><br>
+            <p>Bluetooth Emoji Speaker: Light Up Crying Emoji with a kickstand</p><br>
+            <span> Price: $15    Qty:</span>
+            <input type = "text" id "qty3" placeholder = "Enter a number">
+        </div>
+
+        <!-- Payment and processing -->
+        <br>
+        <button onclick "process()"> Process Order </button>
+        <br>
+        <div id = "output"></div>
+        
+        
+    </body>
+
+</html>
